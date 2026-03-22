@@ -1,18 +1,14 @@
 import express from 'express';
+import { routes } from './routes';
 
 const app = express();
 
 // middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // routes
-app.get('/', (req, res) => {
-    res.send("Secure Software Development Project");
-});
-
-app.get("/health", (req,res) => {
-    res.json({ status: 'ok' });
-});
+app.use("/api", routes);
 
 export default app;
 
