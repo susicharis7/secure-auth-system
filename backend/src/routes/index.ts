@@ -5,4 +5,4 @@ import { apiRouter } from "./api-routes";
 export const routes = Router();
 
 routes.use("/", apiRouter);      // npr. /api
-routes.use("/auth", authRouter); // /api/auth/*
+routes.use("/auth", authRouter); // /api/auth *
