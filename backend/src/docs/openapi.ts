@@ -42,7 +42,7 @@ export const openApiSpec: OpenAPIV3.Document = {
       },
     },
 
-    "/auth/register": {
+    "/register": {
       post: {
         tags: ["Auth"],
         summary: "Register user",
@@ -73,7 +73,7 @@ export const openApiSpec: OpenAPIV3.Document = {
                 schema: {
                   type: "object",
                   properties: {
-                    message: { type: "string", example: "Register successfull." },
+                    message: { type: "string", example: "Register successful." },
                   },
                 },
               },
@@ -86,7 +86,7 @@ export const openApiSpec: OpenAPIV3.Document = {
       },
     },
 
-    "/auth/login": {
+    "/login": {
       post: {
         tags: ["Auth"],
         summary: "Login user",

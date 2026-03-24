@@ -8,3 +8,12 @@ export const config = {
     nodeEnv: process.env.NODE_ENV || 'development'
 };
 
+export function getRequestBinUrl(): string {
+    const baseURL = process.env.REQUEST_BIN_URL;
+
+    if (!baseURL) {
+        throw new Error('REQUEST_BIN_URL is not defined.');
+    };
+
+    return baseURL;
+};
