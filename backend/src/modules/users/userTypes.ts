@@ -10,3 +10,12 @@ export type LoginInput = {
     identifier: string;
     password: string;
 };
+
+export type TwoFactorInput = {
+    code: string;
+};
+
+export type AuthFlowResult = {
+  status: number;
+  body: Record<string, unknown>;
+};

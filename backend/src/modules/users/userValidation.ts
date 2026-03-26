@@ -4,6 +4,10 @@ const reservedUsernames = new Set(["admin", "root", "system", "support"]);
 const usernameRegex = /^[A-Za-z0-9]+$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordComplexRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/;
+const htmlTagRegex = /<\s*\/?\s*[a-z][^>]*>/i;
+const encodedHtmlTagRegex = /&lt;\s*\/?\s*[a-z][^&]*&gt;/i;
+const twoFactorCodeRegex = /^\d{6}$/;
+
 
 // Google phone library validation can replace this later
 const phoneRegex = /^\+?[1-9]\d{7,14}$/;
@@ -19,12 +23,27 @@ export function validateRegisterInput(req: Request, res: Response, next: NextFun
 
   // Full Name
   if (!fullName) return res.status(400).json({ error: "Full name is required." });
+
   if (fullName.length < 3 || fullName.length > 100) {
     return res.status(400).json({ error: "Full name must be between 3 and 100 characters." });
   };
 
+  if (
+    htmlTagRegex.test(fullName) ||
+    encodedHtmlTagRegex.test(fullName) ||
+    fullName.includes("<") ||
+    fullName.includes(">")
+  ) {
+    return res
+      .status(400)
+      .json({ error: "Full name must not contain script or HTML tags." });
+  };
+
+
+
   // Username
   if (!username) return res.status(400).json({ error: "Username is required." });
+
   if (username.length <= 3) {
     return res.status(400).json({ error: "Username must be longer than 3 characters." });
   };
@@ -41,6 +60,7 @@ export function validateRegisterInput(req: Request, res: Response, next: NextFun
 
   // Password
   if (!password) return res.status(400).json({ error: "Password is required." });
+
   if (password.length < 8) {
     return res.status(400).json({ error: "Password must be at least 8 characters long." });
   };
@@ -54,12 +74,14 @@ export function validateRegisterInput(req: Request, res: Response, next: NextFun
 
   // Email
   if (!email) return res.status(400).json({ error: "Email is required." });
+
   if (!emailRegex.test(email)) {
     return res.status(400).json({ error: "Invalid email format." });
   };
 
   // Phone
   if (!phone) return res.status(400).json({ error: "Phone number is required." });
+
   if (!phoneRegex.test(phone)) {
     return res.status(400).json({ error: "Invalid mobile phone format." });
   }
@@ -97,3 +119,14 @@ export function validateLoginInput(req: Request, res: Response, next: NextFuncti
   return next();
 };
 
+export function validateTwoFactorInput(req: Request, res: Response, next: NextFunction) {
+  const body = req.body ?? {};
+  const code = typeof body.code === "string" ? body.code.trim() : "";
+
+  if (!twoFactorCodeRegex.test(code)) {
+    return res.status(400).json({ error: "Code must contain exactly 6 digits." });
+  }
+
+  req.body = { code };
+  return next();
+}
