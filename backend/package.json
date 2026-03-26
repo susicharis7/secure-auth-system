@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon --exec ts-node src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "sms:send": "ts-node src/scripts/infobip/send-sms.ts",
+    "sms:demo": "ts-node src/scripts/infobip/demo-send-sms.ts"
   },
   "keywords": [],
   "author": "",
