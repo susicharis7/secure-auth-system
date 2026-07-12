@@ -1,4 +1,5 @@
 import { getInfobipConfig } from "../config/env";
+import { httpClient } from "./httpClient";
 
 export type SendSMSResult = {
   status: number;
@@ -15,7 +16,7 @@ export async function sendSMS(
 
   const infobip = getInfobipConfig();
 
-  const response = await fetch(`${infobip.baseUrl}${infobip.smsPath}`, {
+  const response = await httpClient(`${infobip.baseUrl}${infobip.smsPath}`, {
     method: "POST",
     headers: {
       Authorization: `App ${infobip.apiKey}`,
@@ -33,23 +34,19 @@ export async function sendSMS(
     }),
   });
 
-  const raw = await response.text();
-  let data: unknown = raw;
-
-  try {
-    data = JSON.parse(raw);
-  } catch {}
-
-  if (!response.ok) {
+   if (response.status < 200 || response.status >= 300) {
+    const raw = typeof response.data === "string" ? response.data : "";
     throw new Error(`Infobip request failed (${response.status}): ${raw}`);
   }
 
-  const messageId = (data as { messages?: Array<{ messageId?: string }> })
+
+
+  const messageId = (response.data as { messages?: Array<{ messageId?: string }> })
     ?.messages?.[0]?.messageId;
 
   return {
     status: response.status,
-    data,
+    data: response.data,
     messageId,
   };
 }

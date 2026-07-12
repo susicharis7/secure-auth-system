@@ -1,0 +1,14 @@
+{
+  "name": "secure-auth-system-ssd",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm --prefix frontend install && npm --prefix backend install",
+    "dev": "npm --prefix frontend run build && npm --prefix backend run dev",
+    "build": "npm --prefix frontend ci && npm --prefix frontend run build && npm --prefix backend ci && npm --prefix backend run build",
+    "start": "npm --prefix backend start",
+    "lint": "npm --prefix frontend run lint"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}   

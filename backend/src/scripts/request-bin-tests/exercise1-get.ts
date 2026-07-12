@@ -1,5 +1,5 @@
 import { getRequestBinUrl } from '../../config/env';
-import { getRequestWithCustomHeaders } from '../../services/httpClient';
+import { getRequestWithCustomHeaders } from '../../services/requestBinService';
 
 async function main() {
     const baseURL = getRequestBinUrl();

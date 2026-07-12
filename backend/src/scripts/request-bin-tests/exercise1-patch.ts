@@ -1,5 +1,5 @@
 import { getRequestBinUrl } from '../../config/env';
-import { patchRequestWithCustomUserAgent } from "../../services/httpClient";
+import { patchRequestWithCustomUserAgent } from "../../services/requestBinService";
 
 async function main() {
     const baseURL = getRequestBinUrl();

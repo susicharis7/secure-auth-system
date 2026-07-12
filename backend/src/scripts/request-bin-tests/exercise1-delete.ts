@@ -1,5 +1,5 @@
 import { getRequestBinUrl } from '../../config/env';
-import { deleteRequest } from '../../services/httpClient';
+import { deleteRequest } from '../../services/requestBinService';
 
 async function main() {
     const baseURL = getRequestBinUrl();

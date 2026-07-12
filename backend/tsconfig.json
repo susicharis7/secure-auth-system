@@ -1,8 +1,11 @@
 {
+  "ts-node": {
+    "files": true
+  },
   "compilerOptions": {
     "target": "ES2020",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "Node16",
+    "moduleResolution": "node16",
     "rootDir": "./src",
     "outDir": "./dist",
     "strict": true,
@@ -12,6 +15,6 @@
     "types": ["node"],
     "sourceMap": true
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

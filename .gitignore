@@ -30,3 +30,11 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+backend/src/scripts/db-pretty.ts
+backend/src/scripts/db-clear.ts
+backend/src/scripts/db-user-block.ts
+backend/src/scripts/db-user-role.ts
+backend/tmp
+
+

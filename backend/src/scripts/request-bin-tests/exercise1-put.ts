@@ -1,5 +1,5 @@
 import { getRequestBinUrl } from '../../config/env';
-import { putRequestWithFormData } from "../../services/httpClient";
+import { putRequestWithFormData } from "../../services/requestBinService";
 
 async function main() {
     const baseURL = getRequestBinUrl();

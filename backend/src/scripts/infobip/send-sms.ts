@@ -11,7 +11,8 @@ async function main() {
 
   const result = await sendVerificationCodeSMS(mobileNumber, code);
   console.log("HTTP Status:", result.status);
-  console.log("Response:", result.data);
+  console.log("Response:", JSON.stringify(result.data, null, 2));
+
 
   if (result.messageId) {
     console.log("Message ID:", result.messageId);

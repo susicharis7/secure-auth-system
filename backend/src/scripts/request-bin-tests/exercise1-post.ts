@@ -1,5 +1,5 @@
 import { getRequestBinUrl } from '../../config/env';
-import { postRequestWithJSONData } from "../../services/httpClient";
+import { postRequestWithJSONData } from "../../services/requestBinService";
 
 async function main() {
     const baseURL = getRequestBinUrl();

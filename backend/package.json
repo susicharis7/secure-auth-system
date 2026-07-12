@@ -4,9 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/server.ts",
+    "dev": "nodemon --watch src --ext ts --exec \"node -r ts-node/register/files src/server.ts\"",
     "build": "tsc",
     "start": "node dist/server.js",
+    "db:clear": "ts-node src/scripts/db-clear.ts",
+    "db:block-user": "ts-node src/scripts/db-user-block.ts block",
+    "db:unblock-user": "ts-node src/scripts/db-user-block.ts unblock",
+    "db:user-role:admin": "ts-node src/scripts/db-user-role.ts admin",
+    "db:user-role:user": "ts-node src/scripts/db-user-role.ts user",
     "sms:send": "ts-node src/scripts/infobip/send-sms.ts",
     "sms:demo": "ts-node src/scripts/infobip/demo-send-sms.ts"
   },
@@ -14,14 +19,35 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "disposable-email-domains-js": "^1.24.0",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "swagger-ui-express": "^5.0.1"
+    "express-rate-limit": "^8.5.2",
+    "googleapis": "^171.4.0",
+    "jsonwebtoken": "^9.0.3",
+    "libphonenumber-js": "^1.12.42",
+    "mysql2": "^3.22.0",
+    "nodemailer": "^8.0.7",
+    "otplib": "^13.4.0",
+    "qrcode": "^1.5.4",
+    "sequelize": "^6.37.8",
+    "swagger-ui-express": "^5.0.1",
+    "tlds": "^1.261.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.5.0",
+    "@types/nodemailer": "^8.0.0",
+    "@types/qrcode": "^1.5.6",
     "@types/swagger-ui-express": "^4.1.8",
     "nodemon": "^3.1.14",
     "openapi-types": "^12.1.3",
