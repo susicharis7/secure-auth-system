@@ -4,7 +4,7 @@ The most secure auth flow 2026. Secure Auth System is a full-stack authenticatio
 
 It can be reused as a secure authentication foundation for any new application, whether this stack, MERN, or another modern web app architecture.
 
-Live app: https://secure-auth-system.tech
+Live app: https://secure-auth-system.tech (Not deployed anymore, needed only for course in university)
 
 ## Overview
 
